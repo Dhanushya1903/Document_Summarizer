@@ -1,73 +1,185 @@
-# Welcome to your Lovable project
+# 📄 AI-Powered Document Intelligence Workflow (NotebookLM-Style)
 
-## Project info
+## 🚀 Overview
 
-**URL**: https://lovable.dev/projects/d0aba27c-3a2b-4a25-9f69-cf68ca2d1010
+This project is an AI-driven document intelligence system that automates the process of understanding and interacting with documents. Inspired by NotebookLM, it allows users to upload documents and generate summaries, insights, and interactive outputs like flashcards and quizzes.
 
-## How can I edit this code?
+The system integrates workflow automation (n8n), AI models (Gemini API), and a modern frontend to deliver a seamless document analysis experience.
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+## 🎯 Problem Statement
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/d0aba27c-3a2b-4a25-9f69-cf68ca2d1010) and start prompting.
+Manual document review is time-consuming and inefficient, especially for large PDFs and research materials. Users often struggle to extract key insights quickly.
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## 💡 Solution
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+This project automates document processing by:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+* Extracting content from uploaded documents
+* Generating AI-powered summaries
+* Creating structured outputs like reports, flashcards, and quizzes
+* Enabling contextual Q&A based on document content
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 🧠 Key Features
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+* 📂 Upload and process documents (PDFs, text, etc.)
+* 📝 AI-generated summaries and key insights
+* 🎧 Audio overview generation
+* 🧠 Flashcards creation for learning
+* ❓ Quiz generation based on content
+* 📊 Structured report generation
+* 💬 Context-aware chatbot (RAG-based)
+* 🔄 Automated workflows using n8n
+* 🔐 Authentication and data storage using Supabase
 
-# Step 3: Install the necessary dependencies.
-npm i
+---
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+## 🏗️ Architecture
+
+The system follows an event-driven pipeline:
+
+1. User uploads a document via frontend
+2. File is sent to n8n via webhook
+3. n8n processes and extracts content
+4. Gemini API generates:
+
+   * Summary
+   * Key points
+   * Q&A
+5. JavaScript function nodes clean and structure output
+6. Data is stored in Supabase
+7. Processed results are displayed in the UI
+
+---
+
+## ⚙️ Tech Stack
+
+### Frontend
+
+* React (Vite)
+* TypeScript
+* Tailwind CSS
+
+### Backend & Automation
+
+* n8n (workflow automation)
+* JavaScript (Function Nodes)
+
+### AI / ML
+
+* Gemini API (LLM)
+
+### Database & Auth
+
+* Supabase (PostgreSQL + Auth)
+
+### Deployment
+
+* Docker (self-hosted n8n workflows)
+
+---
+
+## 🔄 Workflow Overview (n8n)
+
+* Webhook trigger → Receive document
+* Extract text from file
+* Send to Gemini API
+* Process response (JSON cleaning via JS)
+* Store results in Supabase
+* Return structured output to frontend
+
+---
+
+## 📂 Project Structure
+
+```bash
+src/
+ ├── components/
+ ├── notebook/
+ ├── ui/
+ ├── integrations/
+ ├── hooks/
+ └── pages/
+
+n8n/
+ ├── workflows/
+ └── automation scripts
+```
+
+---
+
+## 🧪 How to Run Locally
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/ai-document-intelligence-workflow.git
+cd ai-document-intelligence-workflow
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Setup environment variables
+
+Create a `.env` file:
+
+```env
+VITE_SUPABASE_URL=your_url
+VITE_SUPABASE_PUBLISHABLE_KEY=your_key
+VITE_SUPABASE_PROJECT_ID=your_project_id
+```
+
+### 4. Run the app
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🧩 Required Setup
 
-**Use GitHub Codespaces**
+* Supabase project (Auth + Database tables)
+* n8n workflow running (locally or via Docker)
+* Gemini API key
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+---
 
-## What technologies are used for this project?
+## 📊 Impact
 
-This project is built with:
+* ⚡ Reduced document processing time by ~80%
+* 🤖 Automated manual analysis workflows
+* 📚 Improved learning using flashcards & quizzes
+* 🔄 Scalable pipeline for large document handling
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+---
 
-## How can I deploy this project?
+## ⚠️ Notes
 
-Simply open [Lovable](https://lovable.dev/projects/d0aba27c-3a2b-4a25-9f69-cf68ca2d1010) and click on Share -> Publish.
+* Ensure Supabase tables:
 
-## Can I connect a custom domain to my Lovable project?
+  * `notebooks`
+  * `profiles`
+* Disable RLS or configure policies properly
+* n8n workflows must be active for processing
 
-Yes, you can!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🔮 Future Enhancements
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+* Multi-document comparison
+* Vector database integration (RAG improvement)
+* Real-time collaboration
+* Better UI analytics dashboard
+
+---
+
